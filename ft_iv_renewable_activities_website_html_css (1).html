@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FT-IV Renewable Activities — Tidal, Biomass, Geothermal</title>
+  <style>
+    :root{--accent:#0b76ef;--muted:#6b7280;--card:#ffffff;--bg:#f6f8fb}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial; margin:0; background:var(--bg); color:#111}
+    header{background:linear-gradient(90deg,#0b76ef22,#0b76ef11); padding:28px 20px}
+    .container{max-width:980px;margin:18px auto;padding:18px}
+    h1{margin:0;font-size:1.6rem}
+    p.lead{color:var(--muted); margin-top:6px}
+    nav{display:flex;gap:12px; margin-top:14px}
+    nav a{background:var(--card); padding:8px 12px;border-radius:10px; text-decoration:none; color:var(--accent); box-shadow:0 1px 4px rgba(15,15,15,0.05)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px}
+    .card{background:var(--card); border-radius:12px; padding:16px; box-shadow:0 6px 18px rgba(13,20,30,0.04)}
+    .card h2{margin:4px 0 8px;font-size:1.1rem}
+    .card p{color:var(--muted); margin:0 0 10px}
+    code{background:#f3f4f6;padding:2px 6px;border-radius:6px;font-size:0.9em}
+
+    /* diagrams styling */
+    .diagram{background:#f9fafb;padding:12px;border-radius:8px;border:1px dashed #e6eefc}
+    svg{max-width:100%; height:auto; display:block}
+
+    footer{padding:18px;text-align:center;color:var(--muted)}
+
+    /* small utility */
+    .small{font-size:0.9rem;color:var(--muted)}
+    .actions{display:flex;gap:8px;margin-top:10px}
+    .btn{padding:8px 12px;border-radius:9px;text-decoration:none;border:1px solid #e6eefc;background:white;color:var(--accent)}
+
+    @media (max-width:480px){h1{font-size:1.25rem}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>FT-IV Renewable Activities — Tidal, Biomass, Geothermal</h1>
+      <p class="lead">Three prepared activities (Activity 1: Tidal | Activity 2: Biomass | Activity 3: Geothermal). Each section contains an objective, expanded design notes, sample calculations, and a simple block diagram to include in your FT-IV submission.</p>
+      <nav>
+        <a href="#tidal">Activity 1 — Tidal</a>
+        <a href="#biomass">Activity 2 — Biomass</a>
+        <a href="#geothermal">Activity 3 — Geothermal</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="tidal" class="card">
+      <h2>Activity 1 — Tidal Power Plant (suitable for a coastal village)</h2>
+      <p class="small">Objective: Prepare the architecture of a tidal power plant sized to serve a coastal village (approx. few 100's kW up to 1–2 MW depending on resource).</p>
+      <p>Design notes: For small communities, tidal-stream turbines (in-channel arrays) give a good balance of cost and environmental impact. Key components: turbine array, subsea inter-array cables, subsea-to-shore export cable, onshore substation (protection & step-up), distribution to village or local microgrid, and maintenance/anchoring systems.</p>
+
+      <h3>Quick sizing example (first-order)</h3>
+      <p class="small">Assumptions: mean current speed = 2.5 m/s, turbine swept area per unit = 20 m², power coefficient Cp≈0.35, water density ρ=1025 kg/m³.</p>
+      <ul>
+        <li>Single turbine power ≈ 0.5 × ρ × A × Cp × V³ = 0.5×1025×20×0.35×(2.5³) ≈ 28 kW.</li>
+        <li>To get ~500 kW installed → need ≈ 18 turbines (allow extra for array losses and maintenance → design for 20 units).</li>
+        <li>Estimated annual energy (with capacity factor ≈ 30%) → 500 kW × 0.30 × 8760 ≈ 1.3 GWh/year — suitable for a village.</li>
+      </ul>
+
+      <div class="diagram">
+        <!-- Simple block diagram (tidal) -->
+        <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" aria-label="Tidal power block diagram">
+          <defs>
+            <style>.b{fill:#fff;stroke:#cfe7ff;stroke-width:2;}.t{font:14px/1.2rem sans-serif;fill:#0b3b61}</style>
+          </defs>
+          <rect x="12" y="12" width="260" height="80" rx="10" class="b"/>
+          <text x="28" y="42" class="t">Tidal Stream Turbine Array</text>
+          <text x="28" y="62" class="t" style="font-size:12px;fill:#556">(in-channel moorings)</text>
+
+          <rect x="320" y="12" width="200" height="80" rx="10" class="b"/>
+          <text x="340" y="42" class="t">Power Conditioning Unit</text>
+          <text x="340" y="62" class="t" style="font-size:12px;fill:#556">(inverter / transformer)</text>
+
+          <rect x="620" y="12" width="260" height="80" rx="10" class="b"/>
+          <text x="640" y="42" class="t">Onshore Substation</text>
+          <text x="640" y="62" class="t" style="font-size:12px;fill:#556">(step-up / protection)</text>
+
+          <line x1="272" y1="52" x2="320" y2="52" stroke="#0b76ef" stroke-width="3" marker-end="url(#a)"/>
+          <line x1="520" y1="52" x2="620" y2="52" stroke="#0b76ef" stroke-width="3" marker-end="url(#a)"/>
+
+          <defs>
+            <marker id="a" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
+              <path d="M0 0 L8 4 L0 8 z" fill="#0b76ef"/>
+            </marker>
+          </defs>
+
+          <rect x="100" y="120" width="200" height="70" rx="10" class="b"/>
+          <text x="120" y="150" class="t">Local Distribution</text>
+          <text x="120" y="168" class="t" style="font-size:12px;fill:#556">(village loads / microgrid)</text>
+
+          <line x1="760" y1="92" x2="760" y2="120" stroke="#0b76ef" stroke-width="3" marker-end="url(#a)"/>
+          <line x1="760" y1="120" x2="300" y2="120" stroke="#0b76ef" stroke-width="3" marker-end="url(#a)"/>
+        </svg>
+      </div>
+
+      <h3>Reporting points</h3>
+      <p class="small">Resource assessment (tidal range/current profile), array spacing (to avoid wake losses), subsea cable sizing, environmental impact, O&M plan, and simple cost/benefit estimates.</p>
+    </section>
+
+    <section id="biomass" class="card">
+      <h2>Activity 2 — Biomass-based Biogas System for 100 Cattle</h2>
+      <p class="small">Objective: Design a biogas generation system for a dairy farm handling 100 cattle (manure feedstock base).</p>
+      <p>Design notes: Typical system includes manure collection (floor scrapers or flush), pre-treatment (screening, mixing with water if needed), anaerobic digester (CSTR/plug-flow), gas storage, gas utilization (CHP or gas cookstoves), and digestate handling as fertilizer.</p>
+
+      <h3>Sample calculations (first-order)</h3>
+      <p class="small">Assumptions (typical values): fresh manure per cow ≈ 40 kg/day, total solids (TS) ≈ 8%, volatile solids (VS) ≈ 70% of TS, biogas yield ≈ 0.4 m³/kg VS.</p>
+      <ul>
+        <li>Total fresh manure/day = 100 × 40 = 4000 kg/day.</li>
+        <li>Total solids (TS) ≈ 4000 × 0.08 = 320 kg/day.</li>
+        <li>VS ≈ 320 × 0.70 = 224 kg VS/day.</li>
+        <li>Estimated biogas ≈ 224 × 0.4 ≈ 89.6 m³/day (≈ 64 m³ CH₄/day if CH₄≈70%).</li>
+        <li>Energy content (CH₄ ~ 35.8 MJ/m³) → ~64×35.8 ≈ 2291 MJ/day ≈ 636 kWh/day of chemical energy (thermal). Electrical from small engine (efficiency ~30%) → ~190 kWh/day electrical.</li>
+      </ul>
+
+      <div class="diagram">
+        <!-- Simple block diagram (biogas) -->
+        <svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg" aria-label="Biogas block diagram">
+          <style>.bb{fill:#fff;stroke:#e8f5ea;stroke-width:2}.tt{font:13px sans-serif;fill:#114022}</style>
+
+          <rect x="12" y="12" width="220" height="70" rx="10" class="bb"/>
+          <text x="28" y="38" class="tt">Manure Collection</text>
+          <text x="28" y="58" style="font-size:11px;fill:#547">(from 100 cattle)</text>
+
+          <rect x="260" y="12" width="220" height="70" rx="10" class="bb"/>
+          <text x="282" y="42" class="tt">Pre-treatment / Mixing</text>
+          <text x="282" y="58" style="font-size:11px;fill:#547">(screening, dilution)</text>
+
+          <rect x="508" y="12" width="220" height="70" rx="10" class="bb"/>
+          <text x="532" y="42" class="tt">Anaerobic Digester</text>
+          <text x="532" y="58" style="font-size:11px;fill:#547">(CSTR or plug flow)</text>
+
+          <line x1="232" y1="47" x2="260" y2="47" stroke="#2d9b3a" stroke-width="3" marker-end="url(#b)"/>
+          <line x1="480" y1="47" x2="508" y2="47" stroke="#2d9b3a" stroke-width="3" marker-end="url(#b)"/>
+
+          <defs>
+            <marker id="b" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
+              <path d="M0 0 L8 4 L0 8 z" fill="#2d9b3a"/>
+            </marker>
+          </defs>
+
+          <rect x="120" y="110" width="240" height="70" rx="10" class="bb"/>
+          <text x="136" y="140" class="tt">Digestate / Slurry</text>
+          <text x="136" y="158" style="font-size:11px;fill:#547">(fertilizer / disposal)</text>
+
+          <rect x="420" y="110" width="240" height="70" rx="10" class="bb"/>
+          <text x="450" y="140" class="tt">Biogas Storage</text>
+          <text x="450" y="158" style="font-size:11px;fill:#547">(gas holder / balloons)</text>
+
+          <rect x="660" y="110" width="200" height="70" rx="10" class="bb"/>
+          <text x="676" y="140" class="tt">Gas Utilization</text>
+          <text x="676" y="158" style="font-size:11px;fill:#547">(engine, CHP, cooking)</text>
+
+          <line x1="628" y1="145" x2="660" y2="145" stroke="#2d9b3a" stroke-width="3" marker-end="url(#b)"/>
+          <line x1="728" y1="82" x2="728" y2="110" stroke="#2d9b3a" stroke-width="3" marker-end="url(#b)"/>
+        </svg>
+      </div>
+
+      <h3>Reporting points</h3>
+      <p class="small">Specify digester type, HRT (e.g., 30–40 days for mesophilic), operating temp (mesophilic ~35°C), slurry handling, safety & gas cleanup if using engines, expected O&M, and a short payback estimate if CHP is used.</p>
+    </section>
+
+    <section id="geothermal" class="card">
+      <h2>Activity 3 — Geothermal Power Plant (hot water wells)</h2>
+      <p class="small">Objective: Design a geothermal power plant system for electricity generation where hot water wells exist (binary OR flash system depending on temperature).</p>
+      <p>Design notes: For moderate-temperature wells (80–170°C) an organic Rankine cycle (binary) is preferred. For >180°C, flash-steam may be used. Include production well, separators/heat exchangers, turbine, condenser (air/water cooled), reinjection wells, and balance-of-plant.</p>
+
+      <h3>Example sizing notes (first-order)</h3>
+      <p class="small">Assumptions: hot water production = 50 kg/s at 120°C, reinjection temp target ~40°C, binary cycle thermal efficiency ~10–12% (depends on temperatures).</p>
+      <ul>
+        <li>Thermal power = mass × Cp × ΔT ≈ 50 kg/s × 4.18 kJ/kg·K × (120−40)K ≈ 16720 kW thermal (~16.7 MWth).</li>
+        <li>Electrical output (at 11% efficiency) ≈ 16.7 MWth × 0.11 ≈ 1.84 MWe — suitable for village-scale or small community supply.</li>
+        <li>Choose working fluid for ORC (e.g., R245fa, pentane variants) based on critical temp and environmental considerations.</li>
+      </ul>
+
+      <div class="diagram">
+        <!-- Simple block diagram (geothermal) -->
+        <svg viewBox="0 0 900 240" xmlns="http://www.w3.org/2000/svg" aria-label="Geothermal block diagram">
+          <style>.g{fill:#fff;stroke:#ffe9d6;stroke-width:2}.st{font:13px sans-serif;fill:#4a2b10}</style>
+
+          <rect x="12" y="12" width="220" height="70" rx="10" class="g"/>
+          <text x="28" y="42" class="st">Production Well</text>
+          <text x="28" y="60" style="font-size:11px;fill:#7a5d48">(hot water/steam)</text>
+
+          <rect x="260" y="12" width="240" height="70" rx="10" class="g"/>
+          <text x="290" y="42" class="st">Separator / Heat Exchanger</text>
+          <text x="290" y="60" style="font-size:11px;fill:#7a5d48">(binary OR flash)</text>
+
+          <rect x="520" y="12" width="240" height="70" rx="10" class="g"/>
+          <text x="540" y="42" class="st">Turbine + Generator</text>
+          <text x="540" y="60" style="font-size:11px;fill:#7a5d48">(ORC turbine)</text>
+
+          <line x1="232" y1="47" x2="260" y2="47" stroke="#ff9f3f" stroke-width="3" marker-end="url(#c)"/>
+          <line x1="500" y1="47" x2="520" y2="47" stroke="#ff9f3f" stroke-width="3" marker-end="url(#c)"/>
+
+          <defs>
+            <marker id="c" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
+              <path d="M0 0 L8 4 L0 8 z" fill="#ff9f3f"/>
+            </marker>
+          </defs>
+
+          <rect x="200" y="120" width="220" height="70" rx="10" class="g"/>
+          <text x="220" y="150" class="st">Condenser / Cooling</text>
+          <text x="220" y="168" style="font-size:11px;fill:#7a5d48">(air or water cooled)</text>
+
+          <rect x="460" y="120" width="240" height="70" rx="10" class="g"/>
+          <text x="480" y="150" class="st">Reinjection Well</text>
+          <text x="480" y="168" style="font-size:11px;fill:#7a5d48">(sustain resource)</text>
+
+          <line x1="640" y1="82" x2="640" y2="120" stroke="#ff9f3f" stroke-width="3" marker-end="url(#c)"/>
+        </svg>
+      </div>
+
+      <h3>Reporting points</h3>
+      <p class="small">Include reservoir temperature and flow tests, choice of ORC working fluid, cooling method, reinjection strategy, environmental assessment (induced seismicity, water chemistry), and an outline O&M schedule.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    © FT-IV Renewable Activities • Edit the diagrams and notes as required for your submission.
+  </footer>
+
+</body>
+</html>
